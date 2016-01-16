@@ -15,13 +15,17 @@
 @/etc/bacula/conf.d/schedule.conf
 @/etc/bacula/conf.d/fileset.conf
 @/etc/bacula/conf.d/jobdefs.conf
-@/etc/bacula/conf.d/client-directory.conf
-@/etc/bacula/conf.d/job-backup-catalog.conf
-@/etc/bacula/conf.d/job-director.conf
-@/etc/bacula/conf.d/job-restore.conf
+
+### Local client definitions ###
+@/etc/bacula/conf.d/client-director.conf
 
 ### Include client definitions ###
 @|"find /etc/bacula/conf.d/clients -name '*.conf' -type f -exec echo @{} \;"
+
+### Jobs definitions ###
+@/etc/bacula/conf.d/job-backup-catalog.conf
+@/etc/bacula/conf.d/job-director.conf
+@/etc/bacula/conf.d/job-restore.conf
 
 ### Include job definitions ###
 @|"find /etc/bacula/conf.d/jobs -name '*.conf' -type f -exec echo @{} \;"
