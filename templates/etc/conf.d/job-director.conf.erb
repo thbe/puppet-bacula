@@ -1,0 +1,7 @@
+### Job Definition for <%= @fqdn %> ###
+Job {
+  Name = "Job-<%= @fqdn %>"
+  JobDefs = "DefaultJob"
+  Client = Client-<%= @fqdn %>
+  FileSet = "UnixServerComplete"
+}

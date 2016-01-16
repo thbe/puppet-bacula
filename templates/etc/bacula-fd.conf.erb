@@ -1,0 +1,43 @@
+### /etc/bacula/bacula-fd.conf
+#
+# Backup file daemon configuration file for Bacula
+#
+# managed by Puppet, local changes will be overwritten
+#
+
+#
+# List Directors who are permitted to contact this File daemon
+#
+Director {
+  Name = BackupServerDirector
+  Password = <%= scope.lookupvar('bacula::client_password') %>
+}
+
+#
+# Restricted Director, used by tray-monitor to get the
+#   status of the file daemon
+#
+Director {
+  Name = BackupServerMonitor
+  Password = <%= scope.lookupvar('bacula::monitor_password') %>
+  Monitor = yes
+}
+
+#
+# "Global" File daemon configuration specifications
+#
+FileDaemon {
+Name = Backup-<%= @fqdn %>
+  FDport = 9102
+  WorkingDirectory = /var/spool/bacula
+  Pid Directory = /var/run
+  Maximum Concurrent Jobs = 20
+  Heartbeat Interval = 5 min
+  FDAddress = <%= @fqdn %>
+}
+
+# Send all messages except skipped files back to Director
+Messages {
+  Name = Standard
+  director = BackupServerDirector = all, !skipped, !restored
+}

@@ -1,0 +1,11 @@
+### Client definition for <%= @local_client_fqdn %> ###
+Client {
+  Name = Client-<%= @local_client_fqdn %>
+  Address = <%= @local_client_fqdn %>
+  FDPort = 9102
+  Catalog = Job-Backup-Catalog
+  Password = <%= scope.lookupvar('bacula::client_password') %>
+  File Retention = <%= @local_file_retention %>
+  Job Retention = <%= @local_job_retention %>
+  AutoPrune = yes
+}

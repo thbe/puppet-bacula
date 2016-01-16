@@ -1,0 +1,20 @@
+### /etc/bacula/conf.d/schedule.conf
+#
+# Backup director schedule configuration file for Bacula
+#
+# managed by Puppet, local changes will be overwritten
+#
+
+### Define schedules for backups ###
+Schedule {
+  Name = "WeeklyCycle"
+  Run = Full 1st sun at 21:30
+  Run = Differential 2nd-5th sun at 21:30
+  Run = Incremental mon-sat at 22:00
+}
+
+# This schedule does the catalog. It starts after the WeeklyCycle
+Schedule {
+  Name = "WeeklyCycleAfterBackup"
+  Run = Full sun-sat at 23:30
+}

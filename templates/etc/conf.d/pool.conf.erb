@@ -1,0 +1,61 @@
+### /etc/bacula/conf.d/pool.conf
+#
+# Backup director pool configuration file for Bacula
+#
+# managed by Puppet, local changes will be overwritten
+#
+
+### Default pool definition ###
+Pool {
+  Name = Default
+  Pool Type = Backup
+  Recycle = yes
+  AutoPrune = yes
+  Volume Retention = 40 days
+  Maximum Volume Jobs = 50
+  Maximum Volumes = 500
+}
+
+Pool {
+  Name = Catalog-Pool
+  Pool Type = Backup
+  Recycle = yes
+  AutoPrune = yes
+  Volume Retention = 80 days
+  Maximum Volume Jobs = 1
+  Label Format = Catalog-
+  Maximum Volumes = 100
+}
+
+Pool {
+  Name = Full-Pool
+  Pool Type = Backup
+  Recycle = yes
+  AutoPrune = yes
+  Volume Retention = 70 days
+  Maximum Volume Jobs = 1
+  Label Format = Full-
+  Maximum Volumes = 250
+}
+
+Pool {
+  Name = Diff-Pool
+  Pool Type = Backup
+  Recycle = yes
+  AutoPrune = yes
+  Volume Retention = 50 days
+  Maximum Volume Jobs = 5
+  Label Format = Diff-
+  Maximum Volumes = 250
+}
+
+Pool {
+  Name = Inc-Pool
+  Pool Type = Backup
+  Recycle = yes
+  AutoPrune = yes
+  Volume Retention = 30 days
+  Maximum Volume Jobs = 10
+  Label Format = Inc-
+  Maximum Volumes = 250
+}

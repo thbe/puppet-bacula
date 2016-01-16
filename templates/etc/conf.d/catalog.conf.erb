@@ -1,0 +1,12 @@
+### /etc/bacula/conf.d/catalog.conf
+#
+# Backup director catalog configuration file for Bacula
+#
+# managed by Puppet, local changes will be overwritten
+#
+
+### Generic catalog service ###
+Catalog {
+  Name = BackupCatalog
+  dbname = "bacula"; DB Address = localhost; dbuser = "bacula"; dbpassword = "<%= scope.lookupvar('bacula::db_password') %>"
+}

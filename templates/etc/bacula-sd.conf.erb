@@ -1,0 +1,55 @@
+### /etc/bacula/bacula-sd.conf
+#
+# Backup storage daemon configuration file for Bacula
+#
+# managed by Puppet, local changes will be overwritten
+#
+
+Storage {
+  Name = BackupServerStorageDaemon
+  SDPort = 9103
+  WorkingDirectory = "/var/spool/bacula"
+  Pid Directory = "/var/run"
+  Maximum Concurrent Jobs = 20
+  Heartbeat Interval = 5 min
+  SDAddress = <%= @fqdn %>
+}
+
+#
+# List Directors who are permitted to contact Storage daemon
+#
+Director {
+  Name = BackupServerDirector
+  Password = <%= scope.lookupvar('bacula::storage_password') %>
+}
+
+#
+# Restricted Director, used by tray-monitor to get the
+#   status of the storage daemon
+#
+Director {
+  Name = BackupServerMonitor
+  Password = <%= scope.lookupvar('bacula::monitor_password') %>
+  Monitor = yes
+}
+
+# Devices supported by this Storage daemon
+# To connect, the Director's bacula-dir.conf must have the
+#  same Name and MediaType.
+Device {
+  Name = FileStorage
+  Media Type = File
+  Archive Device = /srv/bacula
+  LabelMedia = yes;
+  Random Access = Yes;
+  AutomaticMount = yes;
+  RemovableMedia = no;
+  AlwaysOpen = no;
+}
+
+# Send all messages to the Director,
+# mount messages also are sent to the email address
+Messages {
+  Name = Standard
+  director = BackupServerDirector = all
+}

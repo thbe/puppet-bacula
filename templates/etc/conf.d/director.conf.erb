@@ -1,0 +1,20 @@
+### /etc/bacula/conf.d/director.conf
+#
+# Backup director configuration file for Bacula
+#
+# managed by Puppet, local changes will be overwritten
+#
+
+### Director definition ###
+Director {
+  Name = BackupServerDirector
+  DIRport = 9101
+  QueryFile = "/usr/libexec/bacula/query.sql"
+  WorkingDirectory = "/var/spool/bacula"
+  PidDirectory = "/var/run"
+  Maximum Concurrent Jobs = 1
+  Password = <%= scope.lookupvar('bacula::client_password') %>
+  Messages = Daemon
+  Heartbeat Interval = 2 min
+  DirAddress = <%= @fqdn %>
+}

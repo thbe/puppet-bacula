@@ -1,0 +1,28 @@
+### /etc/bacula/conf.d/messages.conf
+#
+# Backup director messages configuration file for Bacula
+#
+# managed by Puppet, local changes will be overwritten
+#
+
+### Reasonable message delivery -- send most everything to email address ###
+Messages {
+  Name = Standard
+  mailcommand = "/usr/sbin/bsmtp -h <%= scope.lookupvar('bacula::mail_hub') %> -f \"\(Bacula\) \<bacula@<%= @fqdn %>\>\" -s \"Bacula: %t %e of %c %l\" %r"
+  operatorcommand = "/usr/sbin/bsmtp -h <%= scope.lookupvar('bacula::mail_hub') %> -f \"\(Bacula\) \<bacula@<%= @fqdn %>\>\" -s \"Bacula: Intervention needed for %j\" %r"
+  mail = <%= scope.lookupvar('bacula::mail_group') %> = all, !skipped
+  operator = <%= scope.lookupvar('bacula::mail_group') %> = mount
+  append = "/var/spool/bacula/log" = all, !skipped, !terminate
+  syslog = all, !skipped
+  catalog = all
+}
+
+
+
+Messages {
+  Name = Daemon
+  mailcommand = "/usr/sbin/bsmtp -h <%= scope.lookupvar('bacula::mail_hub') %> -f \"\(Bacula\) \<bacula@<%= @fqdn %>\>\" -s \"Bacula: %t %e of %c %l\" %r"
+  mail = <%= scope.lookupvar('bacula::mail_group') %> = all, !skipped
+  syslog = all, !skipped
+  append = "/var/log/bacula.log" = all, !skipped
+}

@@ -1,0 +1,27 @@
+### /etc/bacula/bacula-dir.conf
+#
+# Backup director configuration file for Bacula
+#
+# managed by Puppet, local changes will be overwritten
+#
+
+### Include director configurations ###
+@/etc/bacula/conf.d/director.conf
+@/etc/bacula/conf.d/console.conf
+@/etc/bacula/conf.d/storage.conf
+@/etc/bacula/conf.d/catalog.conf
+@/etc/bacula/conf.d/messages.conf
+@/etc/bacula/conf.d/pool.conf
+@/etc/bacula/conf.d/schedule.conf
+@/etc/bacula/conf.d/fileset.conf
+@/etc/bacula/conf.d/jobdefs.conf
+@/etc/bacula/conf.d/client-directory.conf
+@/etc/bacula/conf.d/job-backup-catalog.conf
+@/etc/bacula/conf.d/job-director.conf
+@/etc/bacula/conf.d/job-restore.conf
+
+### Include client definitions ###
+@|"find /etc/bacula/conf.d/clients -name '*.conf' -type f -exec echo @{} \;"
+
+### Include job definitions ###
+@|"find /etc/bacula/conf.d/jobs -name '*.conf' -type f -exec echo @{} \;"

@@ -1,0 +1,16 @@
+### /etc/bacula/conf.d/storage.conf
+#
+# Backup director storage configuration file for Bacula
+#
+# managed by Puppet, local changes will be overwritten
+#
+
+### Definition of file storage device (if on same box) ###
+Storage {
+  Name = File
+  Address = <%= scope.lookupvar('bacula::storage_daemon') %>
+  SDPort = 9103
+  Password = <%= scope.lookupvar('bacula::storage_password') %>
+  Device = FileStorage
+  Media Type = File
+}

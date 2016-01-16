@@ -1,0 +1,71 @@
+### /etc/bacula/conf.d/fileset.conf
+#
+# Backup director fileset configuration file for Bacula
+#
+# managed by Puppet, local changes will be overwritten
+#
+
+### List of files to be backed up on the various systems ###
+FileSet {
+  Name = "Catalog"
+  Include {
+    Options {
+      compression = GZIP
+      signature = SHA1
+    }
+    File = "/var/spool/bacula/bacula.sql"
+  }
+}
+
+FileSet {
+  Name = "UnixServerComplete"
+  Include {
+    Options {
+      compression = GZIP
+      signature = SHA1
+      sparse = yes
+      exclude = yes
+      wilddir = /.snap
+      wilddir = /.journal
+      wilddir = /.fsck
+      wilddir = /proc
+      wilddir = /misc
+      wilddir = /net
+      wilddir = /selinux
+      wilddir = /sys
+      wilddir = /dev
+      wilddir = /tmp
+      wilddir = /var/tmp
+      wilddir = /var/log
+      wilddir = /var/lock
+      wilddir = /var/run
+      wilddir = /var/mrepo
+      wilddir = /var/lib/nfs/rpc_pipefs
+      wilddir = /usr/src
+      wilddir = /srv/backup
+    }
+    File = "\\|sh -c 'mount | grep -E \"ext2|ext3|ext4|xfs\" | cut -d \" \" -f3'"
+  }
+}
+
+FileSet {
+  Name = "UnixServerBackupOnly"
+  Include {
+    Options {
+      compression = GZIP
+      signature = SHA1
+    }
+    File = /srv/backup/data
+  }
+}
+
+FileSet {
+  Name = "WindowsServerBackupOnly"
+  Enable VSS = yes
+  Include {
+    Options {
+      signature = SHA1
+    }
+    File = c:/local/backup
+  }
+}

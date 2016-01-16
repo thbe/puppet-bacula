@@ -1,0 +1,13 @@
+### /etc/bacula/conf.d/console.conf
+#
+# Backup director console configuration file for Bacula
+#
+# managed by Puppet, local changes will be overwritten
+#
+
+### Restricted console used by tray-monitor to get the status of the director ###
+Console {
+  Name = BackupServerMonitor
+  Password = <%= scope.lookupvar('bacula::monitor_password') %>
+  CommandACL = status, .status
+}
