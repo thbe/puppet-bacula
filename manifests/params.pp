@@ -62,6 +62,9 @@ class bacula::params {
       $config_confd_storage                       = '/etc/bacula/conf.d/storage.conf'
       $config_confd_storage_template              = 'bacula/etc/conf.d/storage.conf.erb'
 
+      $config_schema_script                       = '/etc/bacula/populate_bacula_schema.sh'
+      $config_schema_script_file                  = 'puppet:///modules/bacula/etc/populate_icinga_schema.sh'
+
       $config_confd_client_template               = 'bacula/etc/conf.d/client-template.conf.erb'
       $config_confd_job_template                  = 'bacula/etc/conf.d/job-template.conf.erb'
 

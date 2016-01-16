@@ -55,9 +55,18 @@ class bacula::config::mysql {
   include mysql::server::account_security
   include mysql::server::mysqltuner
 
-  exec { '/usr/libexec/bacula/make_mysql_tables':
+  # Create schema population script
+  file { $bacula::params::config_schema_script:
+    ensure  => file,
+    mode    => '0644',
+    source  => $bacula::params::config_schema_script_file,
+    require => Package[$bacula::params::package_file];
+  }
+
+  # Execute schema population script
+  exec { '/etc/bacula/populate_bacula_schema.sh':
     path   => '/bin:/sbin:/usr/bin:/usr/sbin',
-    onlyif => 'test -x /usr/libexec/bacula/make_mysql_tables',
+    onlyif => 'test -x /etc/bacula/populate_bacula_schema.sh',
     unless => 'test -f /etc/sysconfig/mysqldb_bacula'
   }
 }
