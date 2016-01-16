@@ -5,8 +5,8 @@
 # managed by Puppet, local changes will be overwritten
 #
 
-### Generic catalog service ###
+### Generic catalog ###
 Catalog {
-  Name = BackupCatalog
+  Name = Job-Backup-Catalog
   dbname = "bacula"; DB Address = localhost; dbuser = "bacula"; dbpassword = "<%= scope.lookupvar('bacula::db_password') %>"
 }
