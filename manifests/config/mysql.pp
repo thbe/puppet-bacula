@@ -55,9 +55,9 @@ class bacula::config::mysql {
   include mysql::server::account_security
   include mysql::server::mysqltuner
 
-  exec { '/usr/libexec/bacula/create_mysql_database':
+  exec { '/usr/libexec/bacula/make_mysql_tables':
     path   => '/bin:/sbin:/usr/bin:/usr/sbin',
-    onlyif => 'test -x /usr/libexec/bacula/create_mysql_database',
+    onlyif => 'test -x /usr/libexec/bacula/make_mysql_tables',
     unless => 'test -f /etc/sysconfig/mysqldb_bacula'
   }
 }
