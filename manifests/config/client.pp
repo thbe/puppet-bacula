@@ -11,10 +11,10 @@
 # Sample Usage:
 #
 define bacula::config::client (
-  String[7] $client_fqdn   = $title,
-  String $fileset          = 'UnixServerComplete',
-  String $file_retention   = '10 days',
-  String $job_retention    = '30 days'
+  $client_fqdn      = $title,
+  $fileset          = 'UnixServerComplete',
+  $file_retention   = '10 days',
+  $job_retention    = '30 days'
   ) {
 
   # Define local variables for template
