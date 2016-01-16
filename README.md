@@ -1,5 +1,9 @@
 # bacula
 
+[![Build Status](https://travis-ci.org/thbe/puppet-bacula.png?branch=master)](https://travis-ci.org/thbe/puppet-bacula)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/thbe/bacula.svg)](https://forge.puppetlabs.com/thbe/bacula)
+[![Coverage Status](https://coveralls.io/repos/thbe/puppet-ssmtp/badge.svg?branch=master&service=github)](https://coveralls.io/github/thbe/puppet-bacula?branch=master)
+
 #### Table of Contents
 
 1. [Description](#description)
