@@ -17,7 +17,7 @@ MYSQL_PASSWORD=${1:-0nly4install}
 # Define schema
 INPUT_FILE="/usr/libexec/bacula/make_mysql_tables"
 TMP_FILE="/tmp/schema_mysql.sql"
-SCHEMA_BACULA=$(ls -1 /etc/bacula/schema_mysql.sql)
+SCHEMA_BACULA="/etc/bacula/schema_mysql.sql"
 
 # Populate Bacula schema and write status to sysconfig
 if [ ! -f /etc/sysconfig/mysqldb_bacula ]; then
