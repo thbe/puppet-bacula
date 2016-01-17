@@ -30,6 +30,13 @@ if [ ! -f /etc/sysconfig/mysqldb_bacula ]; then
     echo "Can not create Bacula schema"; exit 1
   fi
   rm ${TMP_FILE}
+  if [ ${?} -ne 0 ]; then
+    echo "Can not remove temporary file"; exit 1
+  fi
+  sed -i 's/\\`/`/g' ${SCHEMA_BACULA}
+  if [ ${?} -ne 0 ]; then
+    echo "Can not remove unmask from SQL input"; exit 1
+  fi
   ${MYSQL_COMMAND} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} bacula < ${SCHEMA_BACULA}
   if [ ${?} -eq 0 ]; then
     echo "Bacula database schema created" > /etc/sysconfig/mysqldb_bacula
