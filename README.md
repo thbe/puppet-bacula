@@ -18,70 +18,149 @@
 
 ## Description
 
-Start with a one- or two-sentence summary of what the module does and/or what
-problem it solves. This is your 30-second elevator pitch for your module.
-Consider including OS/Puppet version it works with.
-
-You can give more descriptive information in a second paragraph. This paragraph
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?" If your module has a range of functionality (installation, configuration,
-management, etc.), this is the time to mention it.
+This module install and configure the enterprise class Bacula backup solution. It could
+be used for all three components, the client, the server and the storage side.
 
 ## Setup
 
-### What bacula affects **OPTIONAL**
+### What bacula affects
 
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
+* The module install packages based on usage type.
+* The module configure the services based on usage type.
+* The module start the necessary services based on usage type.
+* The module install and configure MySQL if used as backup server.
 
-If there's more that they should know about, though, this is the place to mention:
+### Setup Requirements
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section
-here.
+No additional actions needed to use this module.
 
 ### Beginning with bacula
 
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most
-basic use of the module.
+This module could be used to install and configure three components needed to
+perform distributed backups.
 
 ## Usage
 
-This section is where you describe how to customize, configure, and do the
-fancy stuff with your module here. It's especially helpful if you include usage
-examples and code samples for doing things with your module.
+This module can install the:
+
+* Bacula director
+* Bacula storage daemon
+* Bacula file descriptor
+
+### Bacula director
+
+```puppet
+class { 'bacula':
+  type_dir => true,
+  client_password => 'Start123!',
+  monitor_password => 'Start123!',
+  storage_password => 'Start123!',
+  storage_daemon => 'bac-sd.example.local',
+  mail_hub => 'mail.example.local',
+  mail_group => 'bac-group@example.local',
+  backup_clients => [ 'client1.example.local', 'client2.example.local' ]
+}
+```
+
+### Bacula storage daemon
+
+```puppet
+class { 'bacula':
+  type_sd => true,
+  monitor_password => 'Start123!',
+  storage_password => 'Start123!',
+  storage_daemon => 'bac-sd.example.local'
+}
+```
+
+### Bacula file descriptor
+
+```puppet
+class { 'bacula':
+  type_fd => true,
+  client_password => 'Start123!',
+  monitor_password => 'Start123!'
+}
+```
 
 ## Reference
 
-Here, include a complete list of your module's classes, types, providers,
-facts, along with the parameters for each. Users refer to this section (thus
-the name "Reference") to find specific details; most users don't read it per
-se.
+Here is the list of parameters used by this module.
+
+#### `$type_fd`
+
+Specify if file descriptor components should be installed
+Default value is false
+
+#### `$type_sd`
+
+Specify if storage daemon components should be installed
+Default value is false
+
+#### `$type_dir`
+
+Specify if director components should be installed
+Default value is false
+
+#### `$db_password`
+
+Specify the database password
+Default value is 0nly4install
+
+#### `$db_password_hash`
+
+Specify the database password hash
+Default value is \*31F96A5E321BF3E06E35668ED982CC2447CF5B3F
+
+#### `$client_password`
+
+Specify the client password
+Default value is client-password-for-bacula
+
+#### `$monitor_password`
+
+Specify the monitor password
+Default value is monitor-password-for-bacula
+
+#### `$storage_password`
+
+Specify the storage daemon password
+Default value is storage-password-for-bacula
+
+#### `$storage_daemon`
+
+Specify the storage daemon that should be used
+Default value is storage-daemon.domain.local
+
+#### `$mail_hub`
+
+Specify the mail hub that should be used
+Default value is mail-hub.domain.local
+
+#### `$mail_group`
+
+Specify the mail group that should be used
+Default value is bacula-list@domain.local
+
+#### `$backup_clients`
+
+Specify the clients that should be backuped
+Default value is no client
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc. If there
-are Known Issues, you might want to include them under their own heading here.
+This module has been built on and tested against Puppet 4.0 and higher.
+
+The module has been tested on:
+
+* CentOS Linux 7
+
+Testing on other platforms has been light and cannot be guaranteed.
+
+This module does currently only support a limited set of distributions and need to be
+reworked for other distributions as well.
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel
-are necessary or important to include here. Please use the `## ` header.
+If you like to add or improve this module, feel free to fork the module and send
+me a merge request with the modification.

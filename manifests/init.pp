@@ -52,6 +52,10 @@
 #   Specify the mail group that should be used
 #   Default value is bacula-list@domain.local
 #
+# * `backup_clients`
+#   Specify the clients that should be backuped
+#   Default value is no client
+#
 # Variables
 # ----------
 #
@@ -63,12 +67,15 @@
 # @example
 #    class { 'bacula':
 #      type_fd => true,
+#      type_sd => true,
+#      type_dir => true,
 #      client_password => 'Start123!',
 #      monitor_password => 'Start123!',
 #      storage_password => 'Start123!',
 #      storage_daemon => 'bac-sd.example.local',
 #      mail_hub => 'mail.example.local',
 #      mail_group => 'bac-group@example.local',
+#      backup_clients => [ 'client1.example.local', 'client2.example.local' ]
 #    }
 #
 # Authors

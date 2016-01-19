@@ -1,11 +1,11 @@
 {
   "name": "thbe-bacula",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "thbe",
   "summary": "Install a Bacula enterprise class backup instance",
   "license": "GPL-3.0",
   "source": "https://github.com/thbe/puppet-bacula.git",
-  "project_page": "https://github.com/thbe/bacula-icinga",
+  "project_page": "https://github.com/thbe/puppet-bacula",
   "issues_url": "https://github.com/thbe/puppet-bacula/issues",
   "operatingsystem_support": [
     { "operatingsystem": "RedHat", "operatingsystemrelease": [ "5.0", "6.0", "7.0" ] },
