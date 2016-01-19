@@ -21,7 +21,9 @@ class bacula::config::mysql {
       },
     databases        => {
       'bacula' => {
+        # lint:ignore:ensure_first_param
         ensure  => present,
+        # lint:endignore
         charset => 'utf8',
       },
     },
