@@ -62,7 +62,7 @@ class bacula::config::mysql {
     ensure  => file,
     mode    => '0755',
     source  => $bacula::params::config_schema_script_file,
-    require => Package[$bacula::params::package_file];
+    require => Package[$bacula::params::package_director_mysql];
   }
 
   # Execute schema population script

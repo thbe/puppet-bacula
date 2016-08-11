@@ -1,6 +1,6 @@
 {
   "name": "thbe-bacula",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": "thbe",
   "summary": "Install a Bacula enterprise class backup instance",
   "license": "GPL-3.0",
