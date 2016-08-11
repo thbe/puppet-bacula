@@ -15,19 +15,19 @@ class bacula::config::director {
   # Setup Bacula director
   file {
     $bacula::params::config_confd_dir:
-      ensure  => directory,
-      mode    => '0755',
-      path    => $bacula::params::config_confd_dir;
+      ensure => directory,
+      mode   => '0755',
+      path   => $bacula::params::config_confd_dir;
 
     $bacula::params::config_confd_clients_dir:
-      ensure  => directory,
-      mode    => '0755',
-      path    => $bacula::params::config_confd_clients_dir;
+      ensure => directory,
+      mode   => '0755',
+      path   => $bacula::params::config_confd_clients_dir;
 
     $bacula::params::config_confd_jobs_dir:
-      ensure  => directory,
-      mode    => '0755',
-      path    => $bacula::params::config_confd_jobs_dir;
+      ensure => directory,
+      mode   => '0755',
+      path   => $bacula::params::config_confd_jobs_dir;
 
     $bacula::params::config_director:
       ensure  => file,
