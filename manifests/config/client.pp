@@ -29,7 +29,7 @@ define bacula::config::client (
     mode    => '0644',
     content => template($bacula::params::config_confd_client_template),
     notify  => Service[$bacula::params::service_director],
-    require => Package[$bacula::params::package_file];
+    require => Package[$bacula::params::package_director_mysql];
   }
 
   # Create job definition
@@ -38,6 +38,6 @@ define bacula::config::client (
     mode    => '0644',
     content => template($bacula::params::config_confd_job_template),
     notify  => Service[$bacula::params::service_director],
-    require => Package[$bacula::params::package_file];
+    require => Package[$bacula::params::package_director_mysql];
   }
 }
