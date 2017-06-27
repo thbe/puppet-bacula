@@ -105,15 +105,11 @@ class bacula (
 
   # Start workflow
   if $bacula::params::linux {
-    # Containment
-    contain bacula::package
-    contain bacula::config
-    contain bacula::service
-
     # Include classes
-    Class['bacula::package'] ->
-    Class['bacula::config'] ->
-    Class['bacula::service']
+    class{ '::bacula::package': }
+    -> class{ '::bacula::config': }
+    ~> class{ '::bacula::service': }
+    -> Class['::bacula']
   }
   else {
     warning('The current operating system is not supported!')

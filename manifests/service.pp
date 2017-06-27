@@ -13,14 +13,14 @@
 class bacula::service {
 
   if $bacula::type_fd {
-    include bacula::service::file
+    include ::bacula::service::file
   }
 
   if $bacula::type_sd {
-    include bacula::service::storage
+    include ::bacula::service::storage
   }
 
   if $bacula::type_dir {
-    include bacula::service::director
+    include ::bacula::service::director
   }
 }

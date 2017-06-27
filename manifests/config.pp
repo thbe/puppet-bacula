@@ -11,18 +11,18 @@
 # Sample Usage: include bacula::config
 #
 class bacula::config {
-  include bacula::config::user
+  include ::bacula::config::user
 
   if $bacula::type_fd {
-    include bacula::config::file
+    include ::bacula::config::file
   }
 
   if $bacula::type_sd {
-    include bacula::config::storage
+    include ::bacula::config::storage
   }
 
   if $bacula::type_dir {
-    include bacula::config::mysql
-    include bacula::config::director
+    include ::bacula::config::mysql
+    include ::bacula::config::director
   }
 }

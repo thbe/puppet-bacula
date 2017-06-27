@@ -16,8 +16,8 @@ class bacula::config::mysql {
     root_password    => $bacula::db_password,
     override_options => {
       'mysqld' => {
-        'max_connections' => '1024'
-        }
+        'max_connections' => '1024',
+        },
       },
     databases        => {
       'bacula' => {
@@ -54,8 +54,8 @@ class bacula::config::mysql {
     backupuser     => 'bckadm',
   }
 
-  include mysql::server::account_security
-  include mysql::server::mysqltuner
+  include ::mysql::server::account_security
+  include ::mysql::server::mysqltuner
 
   # Create schema population script
   file { $bacula::params::config_schema_script:
@@ -69,6 +69,6 @@ class bacula::config::mysql {
   exec { '/etc/bacula/populate_bacula_schema.sh':
     path   => '/bin:/sbin:/usr/bin:/usr/sbin',
     onlyif => 'test -x /etc/bacula/populate_bacula_schema.sh',
-    unless => 'test -f /etc/sysconfig/mysqldb_bacula'
+    unless => 'test -f /etc/sysconfig/mysqldb_bacula',
   }
 }
