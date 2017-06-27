@@ -1,25 +1,12 @@
 require 'spec_helper'
 
 describe 'bacula', :type => :class do
-
-  context 'with defaults for all parameters' do
-    it { should contain_class('bacula') }
-  end
-
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
         facts
       end
-
-      let(:params) {
-        {
-          :type_fd => true,
-          :type_sd => true,
-          :type_dir => true,
-          :backup_clients => [ 'client01.example.local', 'client02.example.local' ]
-        }
-      }
+      let(:params) { { type_fd: true, type_sd: true, type_dir: true, backup_clients: [ 'client01.example.local', 'client02.example.local' ] } }
 
       it { is_expected.to compile.with_all_deps }
 
