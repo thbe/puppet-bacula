@@ -110,12 +110,6 @@ describe 'bacula', :type => :class do
         expect(content).to match('/etc/bacula/conf.d/clients')
         expect(content).to match('/etc/bacula/conf.d/jobs')
       end
-
-      case facts[:osfamily]
-      when 'RedHat'
-      else
-        it { is_expected.to contain_warning('The current operating system is not supported!') }
-      end
     end
   end
 end
