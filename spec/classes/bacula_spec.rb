@@ -4,7 +4,7 @@ describe 'bacula', :type => :class do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
-        facts
+        facts.merge( { lsbdistid: 'CentOS', lsbmajdistrelease: '7', root_home: '/root', staging_http_get: 'curl' } )
       end
       let(:params) { { type_fd: true, type_sd: true, type_dir: true, backup_clients: [ 'client01.example.local', 'client02.example.local' ] } }
 
