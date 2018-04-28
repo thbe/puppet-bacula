@@ -15,9 +15,6 @@ script:
 matrix:
   fast_finish: true
   include:
-  - rvm: 2.1.9
-    bundler_args: --without system_tests development
-    env: PUPPET_VERSION="~> 4.0" STRICT_VARIABLES=yes CHECK=test
   - rvm: 2.2.7
     bundler_args: --without system_tests development
     env: PUPPET_VERSION="~> 4.0" STRICT_VARIABLES=yes CHECK=test
