@@ -19,4 +19,9 @@ class bacula::package::director {
   package { $bacula::params::package_director_mysql: ensure => installed; }
 
   package { $bacula::params::package_console: ensure => installed; }
+
+  #Failed to apply catalog:
+  #Could not find dependency Package[bacula-client] for File[/etc/bacula/populate_bacula_schema.sh]
+  #at /etc/puppetlabs/code/environments/production/modules/bacula/manifests/config/mysql.pp:61
+  package { $bacula::params::package_file: ensure => installed; }
 }
